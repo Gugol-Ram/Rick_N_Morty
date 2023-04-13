@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"; // EJE 5.3(R-FORMS) importar useEfe
 import axios from "axios"; //EJERCICIO 7(CICLOS)agregar axios y quitar onSearch
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom"; // EJE 1(react routes) agregar este import con Routes y Route; //EJE 2.2(REACT FORMS) agregar a las llaves useLocation para saber donde esta parado el usuario y no mostrar la nav; //EJE 5.2(R-FORMS)importar useNavigate
 import Form from "./components/Form"; // EJE 2(REACT FORMS) importar el componente Form
-// import Favorites from "./components/Favorites";
+import Favorites from "./components/Favorites"; //EJE 5.1(12)
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
 const API_KEY = "5d9cae0b93f7.7c8361b50bac69d75b6e";
@@ -37,7 +37,7 @@ function App() {
   //EJE 5.3(R-FORMS): El useEffect lleva DOS PARAMETROS: el cb y el array de dependencias.IMPORTANTE EL ARRAY SINO SE HACE LOOP INFINITO... ¡¡¡¡BANEO DEL API!!!!!
   useEffect(() => {
     !access && navigate("/");
-  }, [access]); //lo digo al array que tiene que estar pendiente de acces porque cuando cambia eso es que debe ejecutarse el codigo !access &&...
+  }, [access, navigate]); //lo digo al array que tiene que estar pendiente de acces porque cuando cambia eso es que debe ejecutarse el codigo !access &&...
 
   //Este onSearch es el nuevo que me dan para reemplazar el anterior que usaba la cosntante(ejer 7 CICLOS)
   const onSearch = (id) => {
@@ -63,7 +63,9 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname !== "/" ? <Nav onSearch={onSearch} /> : null}
+      {location.pathname !== "/" && (
+        <Nav onSearch={onSearch} setAccess={setAccess} />
+      )}
       <Routes>
         <Route path="/" element={<Form login={login} />} />
         <Route
@@ -72,7 +74,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
-        {/* <Route path="/favorites" element={<Favorites/>}/> */}
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div>
   );
@@ -89,7 +91,7 @@ export default App;
 //
 //EJE 2 (REACT FORMS):importo Form; y dentro del return crear la ruta '/', que la hago haciendo un route debajo de routes
 //
-//
+//EJE EXTRA (10) para hacer el logOut agregamos setAccess={setAccess} al nav onsearch
 
 ///////////////////////////////////////////////////
 
