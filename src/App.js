@@ -1,10 +1,13 @@
 import "./App.css";
 import Cards from "./components/Cards.jsx";
 import Nav from "./components/Nav";
+import About from "./components/About"; //EJE 3(R-ROUTES) crear ruta de about y render
+import Detail from "./components/Detail"; //EJE 3(R-ROUTES) traer ruta detail y render
 import { useState, useEffect } from "react"; // EJE 5.3(R-FORMS) importar useEfect.(dato de color segun de donde viene es en que llaves tengo que ir agregandolo,uE es de react por eso viee acá)
 import axios from "axios"; //EJERCICIO 7(CICLOS)agregar axios y quitar onSearch
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom"; // EJE 1(react routes) agregar este import con Routes y Route; //EJE 2.2(REACT FORMS) agregar a las llaves useLocation para saber donde esta parado el usuario y no mostrar la nav; //EJE 5.2(R-FORMS)importar useNavigate
 import Form from "./components/Form"; // EJE 2(REACT FORMS) importar el componente Form
+// import Favorites from "./components/Favorites";
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
 const API_KEY = "5d9cae0b93f7.7c8361b50bac69d75b6e";
@@ -67,6 +70,9 @@ function App() {
           path="/home"
           element={<Cards characters={characters} onClose={onClose} />}
         />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        {/* <Route path="/favorites" element={<Favorites/>}/> */}
       </Routes>
     </div>
   );
@@ -79,10 +85,12 @@ export default App;
 // //ejercicio 5: le agrego al renderizado de nav la propiedad de onSearch que cree en el ejercicio 4; ejerc 5.2 lo trabajo sobre Nav.jsx
 //
 //EJE 3-CARDS(react routes): creo <Routes> dentro del return y alli agrego la ruta camino para home y muevo la linea de Cards characters..dentro
+// tambien importo el about y el detail, y renderizo debajo de laroute del home en dos rutas aparte. detalle la ruta de DETAIL es variable, por eso tiene id
 //
 //EJE 2 (REACT FORMS):importo Form; y dentro del return crear la ruta '/', que la hago haciendo un route debajo de routes
 //
 //
+
 ///////////////////////////////////////////////////
 
 // import "./App.css";

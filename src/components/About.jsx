@@ -2,7 +2,7 @@ const About = () => {
   return (
     <div>
       <h1>Work in Progress...</h1>
-      <p>Trabajanding fuerte</p>
+      <p>Tratando de no morir en el intento (? </p>
     </div>
   );
 };
